@@ -1,0 +1,10 @@
+Seja a entrada como dada abaixo:
+1 10
+100 200
+201 210
+900 1000
+
+Cada linha contem um par de inteiros (pequenos, na maximo de valor 1000) cuja soma total nao ultrapassarÃ¡ 100000). Seu trabalho Ã© ler todos os pares e mostrar a soma total, no seguinte formato:
+soma=N 
+
+Onde N Ã© a a soma.
