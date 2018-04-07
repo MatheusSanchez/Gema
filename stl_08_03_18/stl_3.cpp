@@ -1,24 +1,20 @@
-//#include <bits/stdc++.h>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
-#include <string.h>
-#include <stack>
-
+#include <bits/stdc++.h>
 
 using namespace std;		
 
 
 int main(){
+	
 
-	stack<pair<int,int>> p;
-	vector<pair<int,int>> v;
+	stack< pair<int,int> > p;
+	vector< pair<int,int> > v;
+
 	int i = 0;
 
 	char c;
 	int aux,aux2;
-
+	int ve;
+	
 	while(1){
 
 		scanf("%d",&aux);
@@ -31,38 +27,50 @@ int main(){
 			v.push_back(make_pair(aux,(aux*-1)));
 		}	
 		
-
+		
 		if(c == '\n'){
-
+			
+			ve = 1;
 			aux2 = v.size();
 
 			for (i = 0; i  != aux2; i++){
+				
 				p.push(make_pair(v[i].first, v[i].second));
 
 				if(p.top().first > 0){
-
 					aux = p.top().first;
 					p.pop();
-					
-					if( !p.empty() && p.top().first == aux*-1 && p.top().second > 0){
+
+					if(aux * (-1) == p.top().first){
 						p.pop();
 
 						if(!p.empty()){
 							p.top().second -= aux;
 						}
+						
+
+						if(!p.empty() && p.top().second <= 0){
+							cout  << ":-( Try again.\n";
+							ve = 0;
+							break;
+						}
 
 					}else{
-
+						cout  << ":-( Try again.\n";
+						ve = 0;
 						break;
 					}
+					
 				}
+
 			}
 			
-			if(p.empty()){
-				printf(":-) Matrioshka!\n");
-			}else{
-				printf(":-( Try again.\n");	
+			if(p.empty() && ve == 1){
+				cout << ":-) Matrioshka!\n";
+			}else if(ve == 1){
+				cout << ":-( Try again.\n";	
 			}
+		
 			while(!p.empty()){
 				p.pop();
 			}
@@ -70,9 +78,54 @@ int main(){
 			v.clear();
 
 			
-		}
+		}else if(c == EOF){		
+			ve = 1;
+			aux2 = v.size();
 
-		if(c == EOF){		
+			for (i = 0; i  != aux2; i++){
+				
+				p.push(make_pair(v[i].first, v[i].second));
+
+				if(p.top().first > 0){
+					aux = p.top().first;
+					p.pop();
+
+					if(aux * (-1) == p.top().first){
+						p.pop();
+
+						if(!p.empty()){
+							p.top().second -= aux;
+						}
+						
+
+						if(!p.empty() && p.top().second <= 0){
+							cout  << ":-( Try again.\n";
+							ve = 0;
+							break;
+						}
+
+					}else{
+						cout  << ":-( Try again.\n";
+						ve = 0;
+						break;
+					}
+					
+				}
+
+			}
+			
+			if(p.empty() && ve == 1){
+				cout << ":-) Matrioshka!\n";
+			}else if(ve == 1){
+				cout << ":-( Try again.\n";	
+			}
+		
+			while(!p.empty()){
+				p.pop();
+			}
+
+			v.clear();
+
 			break;
 		}
 
