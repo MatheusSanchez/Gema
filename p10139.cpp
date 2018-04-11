@@ -57,7 +57,7 @@ int main (){
 
 			int numero = divisor;
 			int indice_primos = 0;
-	
+		
 		while(numero > 1){
 			cout << numero << " " << primos[indice_primos] << endl;
 			if(numero % primos[indice_primos] == 0){
