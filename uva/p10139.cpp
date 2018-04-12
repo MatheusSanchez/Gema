@@ -4,7 +4,7 @@
 #include <iostream>
 #include <bitset>
 #include <stdio.h>
-
+			
 #define MAX 47000
 				
 #define ll long long
@@ -18,8 +18,9 @@ int divide(int fatorial,int divisor,vector< pair<int,int> > v){
 
 	for (it = v.begin(); it != v.end(); it++){
 		ll num = it->first;
+		//cout << (num) << " " << it->second << endl;
 		while(it->second > 0 && num <= fatorial){
-			//cout << (num) << " " << it->second << endl;
+			
 			it->second -= (fatorial/num);
 			num = num* (it->first);
 		}
@@ -32,6 +33,9 @@ int divide(int fatorial,int divisor,vector< pair<int,int> > v){
 	return 15;
 
 }
+
+//123456873
+//123456789
 
 int main (){
 	bitset<MAX> v;
@@ -73,7 +77,6 @@ int main (){
 			cout << divisor <<  " divides " << fatorial << "!" << endl;
 		}else{
 				int numero = divisor;
-		int indice_primos = 0;
 		int aux = 0;	
 
 		vector< pair<int,int> > div_f;
@@ -82,6 +85,7 @@ int main (){
 		for (it_primos = primos.begin(); it_primos != primos.end(); it_primos++){
 			while(numero > 1 && numero % (*it_primos) == 0){
 					numero = numero / (*it_primos);
+					
 					aux++;
 					
 			}
@@ -91,15 +95,10 @@ int main (){
 			}
 			aux = 0;
 		}
-
-		if(aux != 0){
-			//cout << "Eita" <<  primos[indice_primos] << "->" << aux << endl;
-			div_f.pb(make_pair(primos[indice_primos],aux));
-		}
 	
 		if(numero>2){
-			//cout << "Easdadsasd" << cout
-			div_f.pb(make_pair(divisor,1));
+			//cout << "Easdadsasd" << endl;
+			div_f.pb(make_pair(numero,1));
 		}
 
 
