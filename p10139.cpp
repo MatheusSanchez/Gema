@@ -5,8 +5,10 @@
 #include <bitset>
 #include <stdio.h>
 
-#define MAX 10000000
+#define MAX 47000
+				
 #define ll long long
+#define pb push_back
 
 using namespace std;
 
@@ -17,6 +19,7 @@ int main (){
 	v[1] = 0;
 	v[2] = 1;
 	int i = 2;
+
 	vector<int> primos;
 	primos.push_back(2);
 
@@ -37,10 +40,6 @@ int main (){
 	}
 
 
-	/*for (int i = 0; i < primos.size(); ++i){
-		cout << primos[i] << " ";
-	}*/
-
 	int fatorial,divisor;
 	map<int,int> fatores;
 	map<int,int> divisor_f;
@@ -49,80 +48,48 @@ int main (){
 	
 	while(cin >> fatorial >> divisor){	
 		
-		//getchar();
-		
-		
-		//exit(0);
-		
 
-			int numero = divisor;
-			int indice_primos = 0;
-		
+		int numero = divisor;
+		int indice_primos = 0;
+		int aux = 0;	
+		vector< pair<int,int> > v;
+		vector< pair<int,int> >::iterator it;
+
+
 		while(numero > 1){
 			cout << numero << " " << primos[indice_primos] << endl;
 			if(numero % primos[indice_primos] == 0){
 				numero = numero / primos[indice_primos];
-
-				divisor_f[primos[indice_primos]]++;
-
+				aux++;
+				//divisor_f[primos[indice_primos]]++;
 			}else{
+				if(aux != 0){
+					cout << primos[indice_primos] << "->" << aux << endl;
+					v.pb(make_pair(primos[indice_primos],aux));
+
+				}
+				aux = 0;
 				indice_primos++;
 			}
 
 		}
-
-
-		
-		
-
-		vector<ll> num_fatorial;
-
-		for (int i = 0; i <= fatorial; ++i){
-			num_fatorial.push_back(i);
-		}
-	
-		for (it2 = divisor_f.begin(); it2 != divisor_f.end(); it2++){
-
-			int aux = it2->first;
-
-			//cout << it2->first << " " << it2->second << " -> " << aux << endl;
-			while( aux <= fatorial && it2->second != 0){
-				if(num_fatorial[aux] > 1 && num_fatorial[aux] % it2->first == 0){
-					//cout << it2->first << "  " << it2->second << endl;
-					num_fatorial[aux] /= it2->first;
-					it2->second--;
-					/*for (int i = 0; i <= fatorial; ++i){
-						cout << num_fatorial[i] << " ";
-					}*/
-					//cout << endl;
-				}else{
-					aux += it2->first;
-				}
-				//cout << "Chama";
-			}
-			
-
+		if(aux != 0){
+			//cout << primos[indice_primos] << "->" << aux << endl;
+			v.pb(make_pair(primos[indice_primos],aux));
 		}
 
 
-		it2 = divisor_f.begin();
-		for (; it2 != divisor_f.end(); it2++){
-			if(it2->second != 0){
-				//cout << it2->first << "-> " << it2->second << endl;
-				cout << divisor << " does not divide " << fatorial << "!" << endl;	
-				break;
-			}
+		for (it = v.begin(); it != v.end(); it++){
+			cout << it->first << "->" << it->second << endl;	
 		}
-		if(it2 == divisor_f.end()){
-			cout << divisor << " divide " << fatorial << "!" << endl;	
+
+		if(divide(fatorial,divisor,v)){
+			cout << divisor <<  " divide " << fatorial << "!" << endl;
+		}else{
+			cout << divisor <<  " does not divide " << fatorial << "!" << endl;
 		}
-	
 
-		divisor_f.clear();
-		num_fatorial.clear();
-
-	}
-
-
+		v.clear();
+	}	
 	return 0;
 }
