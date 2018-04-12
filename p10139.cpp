@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <vector>
 #include <map>
 #include <iostream>
@@ -12,6 +12,27 @@
 
 using namespace std;
 
+int divide(int fatorial,int divisor,vector< pair<int,int> > v){
+
+	vector< pair<int,int> >:: iterator it;
+
+	for (it = v.begin(); it != v.end(); it++){
+		ll num = it->first;
+		while(it->second > 0 && num <= fatorial){
+			//cout << (num) << " " << it->second << endl;
+			it->second -= (fatorial/num);
+			num = num* (it->first);
+		}
+
+		if(it->second > 0){
+			return -41;	
+		}
+	}
+
+	return 15;
+
+}
+
 int main (){
 	bitset<MAX> v;
 	v.set();
@@ -21,6 +42,7 @@ int main (){
 	int i = 2;
 
 	vector<int> primos;
+	vector<int>:: iterator it_primos;
 	primos.push_back(2);
 
 	while(i*2 < MAX){ // crivo otmizado
@@ -41,55 +63,56 @@ int main (){
 
 
 	int fatorial,divisor;
-	map<int,int> fatores;
-	map<int,int> divisor_f;
-	map<int,int> ::iterator it;
-	map<int,int> ::iterator it2;
 	
 	while(cin >> fatorial >> divisor){	
-		
 
-		int numero = divisor;
+		if(divisor == 0){
+			cout << divisor <<  " does not divide " << fatorial << "!" << endl;
+
+		}else if(fatorial >= divisor){
+			cout << divisor <<  " divides " << fatorial << "!" << endl;
+		}else{
+				int numero = divisor;
 		int indice_primos = 0;
 		int aux = 0;	
-		vector< pair<int,int> > v;
+
+		vector< pair<int,int> > div_f;
 		vector< pair<int,int> >::iterator it;
 
-
-		while(numero > 1){
-			cout << numero << " " << primos[indice_primos] << endl;
-			if(numero % primos[indice_primos] == 0){
-				numero = numero / primos[indice_primos];
-				aux++;
-				//divisor_f[primos[indice_primos]]++;
-			}else{
-				if(aux != 0){
-					cout << primos[indice_primos] << "->" << aux << endl;
-					v.pb(make_pair(primos[indice_primos],aux));
-
-				}
-				aux = 0;
-				indice_primos++;
+		for (it_primos = primos.begin(); it_primos != primos.end(); it_primos++){
+			while(numero > 1 && numero % (*it_primos) == 0){
+					numero = numero / (*it_primos);
+					aux++;
+					
 			}
-
+			if(aux != 0){
+				//cout << (*it_primos) << "->" << aux << endl;
+				div_f.pb(make_pair((*it_primos),aux));
+			}
+			aux = 0;
 		}
+
 		if(aux != 0){
-			//cout << primos[indice_primos] << "->" << aux << endl;
-			v.pb(make_pair(primos[indice_primos],aux));
+			//cout << "Eita" <<  primos[indice_primos] << "->" << aux << endl;
+			div_f.pb(make_pair(primos[indice_primos],aux));
+		}
+	
+		if(numero>2){
+			//cout << "Easdadsasd" << cout
+			div_f.pb(make_pair(divisor,1));
 		}
 
 
-		for (it = v.begin(); it != v.end(); it++){
-			cout << it->first << "->" << it->second << endl;	
-		}
-
-		if(divide(fatorial,divisor,v)){
-			cout << divisor <<  " divide " << fatorial << "!" << endl;
+		if(divide(fatorial,divisor,div_f) == 15){
+			cout << divisor <<  " divides " << fatorial << "!" << endl;
 		}else{
 			cout << divisor <<  " does not divide " << fatorial << "!" << endl;
 		}
 
-		v.clear();
+		div_f.clear();
+		}
+
+	
 	}	
 	return 0;
 }
