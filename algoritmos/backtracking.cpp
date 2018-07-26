@@ -4,7 +4,7 @@
 
 #include <bits/stdc++.h>
 
-#define max 5 // numero máximo de letras na palavra
+#define max 3 // numero máximo de letras na palavra
 #define inf 0x3f3f3f3f
 
 using namespace std;
