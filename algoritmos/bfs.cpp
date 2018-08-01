@@ -8,11 +8,11 @@ using namespace std;
 
 typedef pair<int ,int> p_i; // pair int
 typedef vector<p_i> v_p_i; // vector pair int
+
 typedef vector<int> vi; // vector int
 
-
 vector<v_p_i> g(MAX); // vector de vector pair int; (lista de adjacencia) 
-vi dist (MAX,false); // vector de distancias;
+vi dist (MAX,false); // vector de distancias; // tamanho: MAX // val_inicial = false
 
 int num_nos,num_arestas,A,B;
 
