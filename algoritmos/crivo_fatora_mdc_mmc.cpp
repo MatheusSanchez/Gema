@@ -96,6 +96,18 @@ map<ll,ll> primeFactorMap(ll N){ // fatora o numero(N) em primos
 }
 
 
+ll gcd(ll a, ll b){ // mdc O(log(max(a,b)))
+	if(b==0){
+		return a;
+	}
+
+	return gcd(b,a%b)
+}
+
+ll lcm(ll a, ll b){ // mmc O(log(max(a,b)))
+	return (a*b)/gcd(a,b);
+}
+
 
 int main(){
 
